@@ -9,7 +9,7 @@
 
 ## General info
 
-This project is simple battleships game. It was made to learn some fundamental TypeScript functions.
+This project is simple memory game. It was made to learn some fundamental React functions.
 Project was made to polish my skills in:
 
 - Functional Programming
