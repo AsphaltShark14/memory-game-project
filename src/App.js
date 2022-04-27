@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import SingleCard from './SingleCard';
 
 const cardImages = [
-  {"src": "/img/helmet-1.png"},
-  {"src": "/img/potion-1.png"},
-  {"src": "/img/ring-1.png"},
-  {"src": "/img/scroll-1.png"},
-  {"src": "/img/shield-1.png"},
-  {"src": "/img/sword-1.png"}
+  {"src": "/img/helmet-1.png", matched: false},
+  {"src": "/img/potion-1.png", matched: false},
+  {"src": "/img/ring-1.png", matched: false},
+  {"src": "/img/scroll-1.png", matched: false},
+  {"src": "/img/shield-1.png", matched: false},
+  {"src": "/img/sword-1.png", matched: false}
 ];
 
 function App() {
@@ -40,6 +40,27 @@ function App() {
     setChoiceTwo(null);
     setTurns(prevTurns => prevTurns + 1);
   }
+
+  //compare two selected cards
+  useEffect(() => {
+    if (choiceOne && choiceTwo) {
+      if (choiceOne.src === choiceTwo.src) {
+        setCards(prevCards => {
+          return prevCards.map(card => {
+            if (card.src === choiceOne.src) {
+              return {...card, matched: true}
+            } else {
+              return card
+            } 
+          })
+        })
+        resetTurn();
+      } else {
+        
+        resetTurn();
+      }
+    }
+},[choiceOne,choiceTwo]);
 
   return (
     <div className='App'>
